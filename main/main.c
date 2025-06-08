@@ -1,4 +1,3 @@
-
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -19,6 +18,7 @@
 #include "esp_vfs_fat.h"
 #include "sdmmc_cmd.h"
 #include "driver/sdmmc_host.h"
+#include "ui/ui.h"
 #define LCD_HOST  SPI2_HOST
 
 static SemaphoreHandle_t lvgl_mux = NULL;
@@ -175,8 +175,10 @@ static void example_lvgl_port_task(void *arg)
       task_delay_ms = EXAMPLE_LVGL_TASK_MIN_DELAY_MS;
     }
     vTaskDelay(pdMS_TO_TICKS(task_delay_ms));
+    ui_tick();
   }
 }
+
 void app_main(void)
 {
   static lv_disp_draw_buf_t disp_buf; // contains internal graphic buffer(s) called draw buffer(s)
@@ -284,8 +286,9 @@ void app_main(void)
   xTaskCreate(example_lvgl_port_task, "LVGL", EXAMPLE_LVGL_TASK_STACK_SIZE, NULL, EXAMPLE_LVGL_TASK_PRIORITY, NULL);
   if (example_lvgl_lock(-1))
   {
-    lv_demo_widgets();      /* A widgets example */
-    //lv_demo_music();          /* A modern, smartphone-like music player demo. */
+    ui_init();
+    //lv_demo_widgets();      /* A widgets example */
+    // lv_demo_music();          /* A modern, smartphone-like music player demo. */
     // lv_demo_stress();      /* A stress test for LVGL. */
     //lv_demo_benchmark();    /* A demo to measure the performance of LVGL or to compare different settings. */
     // Release the mutex

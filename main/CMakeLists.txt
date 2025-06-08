@@ -1,2 +1,16 @@
-idf_component_register(SRCS "main.c"
-                    INCLUDE_DIRS ".")
+idf_component_register(
+    SRCS
+        "main.c"
+        "ui/images.c"
+        "ui/screens.c"
+        "ui/styles.c"
+        "ui/ui_font_love_days_128.c"
+        "ui/ui_font_love_days_32.c"
+        "ui/ui_font_love_days_48.c"
+        "ui/ui_font_love_days_64.c"
+        "ui/ui_font_love_days_96.c"
+        "ui/ui.c"
+    INCLUDE_DIRS
+        "."
+        "ui"
+)

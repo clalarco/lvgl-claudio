@@ -1,1 +1,14 @@
 build/
+CMakeFiles/
+managed_components/
+*.o
+*.d
+*.elf
+*.map
+*.hex
+*.bin
+*.csv
+*.txt
+*.log
+*.err
+.cache
