@@ -4,6 +4,7 @@
 #include "esp_lcd_sh8601.h"
 #include "esp_log.h"
 #include "esp_timer.h"
+#include "freertos/idf_additions.h"
 #include "freertos/task.h"
 #include "hal/lv_hal_disp.h"
 #include "hal/lv_hal_indev.h"

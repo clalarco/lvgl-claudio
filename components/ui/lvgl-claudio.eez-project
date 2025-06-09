@@ -104,7 +104,48 @@
   },
   "variables": {
     "objID": "c6c71e16-53e1-217f-d03b-cef56c6b037a",
-    "globalVariables": [],
+    "globalVariables": [
+      {
+        "objID": "58b45b51-ebe3-4612-f0fa-75e68092b129",
+        "name": "time_day",
+        "type": "string",
+        "defaultValue": "\"\"",
+        "persistent": false,
+        "native": false
+      },
+      {
+        "objID": "9c9c596a-820d-4a6a-ea90-c807983f45cb",
+        "name": "time_dow",
+        "type": "string",
+        "defaultValue": "\"\"",
+        "persistent": false,
+        "native": false
+      },
+      {
+        "objID": "ac4e411d-179d-4be0-aeec-3944eb14ffbe",
+        "name": "time_month",
+        "type": "string",
+        "defaultValue": "\"\"",
+        "persistent": false,
+        "native": false
+      },
+      {
+        "objID": "49ac74f3-47e0-4586-cfc5-99aed3f40804",
+        "name": "time_year",
+        "type": "string",
+        "defaultValue": "\"\"",
+        "persistent": false,
+        "native": false
+      },
+      {
+        "objID": "cd002067-51cf-4e01-88a8-761e9fa5ceaa",
+        "name": "time_time",
+        "type": "string",
+        "defaultValue": "\"\"",
+        "persistent": false,
+        "native": false
+      }
+    ],
     "structures": [],
     "enums": []
   },
@@ -138,10 +179,10 @@
             {
               "objID": "4737d1e0-ec22-4384-e302-0e3368b7736d",
               "type": "LVGLLabelWidget",
-              "left": 11,
+              "left": 0,
               "top": 0,
-              "width": 150,
-              "height": 142,
+              "width": 327,
+              "height": 95,
               "customInputs": [],
               "customOutputs": [],
               "style": {
@@ -173,7 +214,7 @@
                 "definition": {
                   "MAIN": {
                     "DEFAULT": {
-                      "text_font": "Love Days 96",
+                      "text_font": "Love Days 64",
                       "text_color": "#fff3ae"
                     }
                   }
@@ -181,17 +222,17 @@
               },
               "group": "",
               "groupIndex": 0,
-              "text": "19:45",
-              "textType": "literal",
+              "text": "time_time",
+              "textType": "expression",
               "longMode": "WRAP",
               "recolor": false
             },
             {
               "objID": "3af6e11f-3c21-4f56-cac7-085f2abf7703",
               "type": "LVGLLabelWidget",
-              "left": 16,
-              "top": 123,
-              "width": 82,
+              "left": 0,
+              "top": 142,
+              "width": 126,
               "height": 37,
               "customInputs": [],
               "customOutputs": [],
@@ -233,17 +274,17 @@
               },
               "group": "",
               "groupIndex": 0,
-              "text": "Monitas",
-              "textType": "literal",
-              "longMode": "WRAP",
+              "text": "time_dow",
+              "textType": "expression",
+              "longMode": "SCROLL_CIRCULAR",
               "recolor": false
             },
             {
               "objID": "e6713b6b-b29e-4136-f888-795b1d3aa33c",
               "type": "LVGLLabelWidget",
-              "left": 67,
+              "left": 0,
               "top": 160,
-              "width": 38,
+              "width": 242,
               "height": 72,
               "customInputs": [],
               "customOutputs": [],
@@ -285,17 +326,17 @@
               },
               "group": "",
               "groupIndex": 0,
-              "text": "22",
-              "textType": "literal",
+              "text": "time_day",
+              "textType": "expression",
               "longMode": "WRAP",
               "recolor": false
             },
             {
               "objID": "91d8c54e-b191-4e48-f4d2-a38fa653eed7",
               "type": "LVGLLabelWidget",
-              "left": 11,
+              "left": 0,
               "top": 217,
-              "width": 151,
+              "width": 198,
               "height": 47,
               "customInputs": [],
               "customOutputs": [],
@@ -337,17 +378,17 @@
               },
               "group": "",
               "groupIndex": 0,
-              "text": "Septiembre",
-              "textType": "literal",
+              "text": "time_month",
+              "textType": "expression",
               "longMode": "WRAP",
               "recolor": false
             },
             {
               "objID": "5861ab1a-bd7f-403c-e363-d5b8efc1e206",
               "type": "LVGLLabelWidget",
-              "left": 63,
+              "left": 0,
               "top": 264,
-              "width": 47,
+              "width": 132,
               "height": 47,
               "customInputs": [],
               "customOutputs": [],
@@ -389,7 +430,7 @@
               },
               "group": "",
               "groupIndex": 0,
-              "text": "2025",
+              "text": "time_year",
               "textType": "literal",
               "longMode": "WRAP",
               "recolor": false

@@ -1,6 +1,9 @@
 file(GLOB_RECURSE SOURCES ${CMAKE_CURRENT_LIST_DIR}/*.c)
+file(GLOB_RECURSE SOURCES_MODULES ${CMAKE_CURRENT_LIST_DIR}/modules/*.c)
 
 idf_component_register(
-    SRCS ${SOURCES}
+    SRCS ${SOURCES} ${SOURCES_MODULES}
     INCLUDE_DIRS "."
+    INCLUDE_DIRS "modules"
+    INCLUDE_DIRS "modules/clock"
 )
