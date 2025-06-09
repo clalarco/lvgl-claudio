@@ -12,3 +12,4 @@ managed_components/
 *.log
 *.err
 .cache
+.DS_Store
