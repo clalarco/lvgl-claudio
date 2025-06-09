@@ -1,20 +1,6 @@
+file(GLOB_RECURSE SOURCES ${CMAKE_CURRENT_LIST_DIR}/*.c)
+
 idf_component_register(
-    SRCS
-        "main.c"
-        "app_lvgl.c"
-        "board_config.c"
-        "ui/images.c"
-        "ui/screens.c"
-        "ui/styles.c"
-        "ui/eez-flow.cpp"
-        "ui/ui_font_love_days_24.c"
-        "ui/ui_font_love_days_32.c"
-        "ui/ui_font_love_days_48.c"
-        "ui/ui_font_love_days_64.c"
-        "ui/ui_font_love_days_96.c"
-        "ui/ui_font_love_days_128.c"
-        "ui/ui.c"
-    INCLUDE_DIRS
-        "."
-        "ui"
+    SRCS ${SOURCES}
+    INCLUDE_DIRS "."
 )
