@@ -12,6 +12,7 @@ void action_switch_to_time_page(lv_event_t * e) {
     loadScreen(SCREEN_ID_MAIN_PAGE);
 }
 
+
 // static lv_obj_t * calendar;
 
 void action_show_calendar(lv_event_t * e)

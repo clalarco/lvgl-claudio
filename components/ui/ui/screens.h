@@ -19,6 +19,7 @@ typedef struct _objects_t {
     lv_obj_t *time_colon;
     lv_obj_t *minutes;
     lv_obj_t *show_clock;
+    lv_obj_t *calendar;
 } objects_t;
 
 extern objects_t objects;

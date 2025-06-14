@@ -222,7 +222,9 @@ void create_screen_calendar_page() {
             }
         }
         {
+            // calendar
             lv_obj_t *obj = lv_calendar_create(parent_obj);
+            objects.calendar = obj;
             lv_obj_set_pos(obj, 0, 0);
             lv_obj_set_size(obj, 172, 270);
             lv_calendar_header_arrow_create(obj);
