@@ -44,7 +44,7 @@ void loadScreen(enum ScreensEnum screenId) {
 
 void ui_init() {
     create_screens();
-    loadScreen(SCREEN_ID_CALENDAR_PAGE);
+    loadScreen(SCREEN_ID_MAIN_PAGE);
 
 }
 

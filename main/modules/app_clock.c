@@ -4,6 +4,7 @@
 #include <sys/time.h>
 #include <time.h>
 
+#include "freertos/FreeRTOS.h"
 #include "freertos/idf_additions.h"
 #include "freertos/projdefs.h"
 #include "misc/lv_area.h"

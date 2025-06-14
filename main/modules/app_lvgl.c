@@ -4,7 +4,7 @@
 #include "esp_lcd_sh8601.h"
 #include "esp_log.h"
 #include "esp_timer.h"
-#include "freertos/idf_additions.h"
+#include "freertos/FreeRTOS.h"
 #include "freertos/task.h"
 #include "hal/lv_hal_disp.h"
 #include "hal/lv_hal_indev.h"
@@ -182,14 +182,14 @@ void app_lvgl_configure(void) {
                                            APP_LVGL_TICK_PERIOD_MS * 1000));
   lvgl_mux = xSemaphoreCreateMutex();
   assert(lvgl_mux);
-  xTaskCreate(app_lvgl_port_task, "LVGL", APP_LVGL_TASK_STACK_SIZE, NULL,
-              APP_LVGL_TASK_PRIORITY, NULL);
   if (app_lvgl_lock(-1)) {
     if (ui_init_cb != NULL) {
       ui_init_cb();
     }
     app_lvgl_unlock();
   }
+  xTaskCreate(app_lvgl_port_task, "LVGL", APP_LVGL_TASK_STACK_SIZE, NULL,
+              APP_LVGL_TASK_PRIORITY, NULL);
 }
 
 /* Public function implementations */

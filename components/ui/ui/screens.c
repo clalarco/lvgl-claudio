@@ -14,40 +14,6 @@ objects_t objects;
 lv_obj_t *tick_value_change_obj;
 uint32_t active_theme_index = 0;
 
-void create_screen_calendar_page() {
-    lv_obj_t *obj = lv_obj_create(0);
-    objects.calendar_page = obj;
-    lv_obj_set_pos(obj, 0, 0);
-    lv_obj_set_size(obj, 172, 320);
-    {
-        lv_obj_t *parent_obj = obj;
-        {
-            // Show Clock
-            lv_obj_t *obj = lv_btn_create(parent_obj);
-            objects.show_clock = obj;
-            lv_obj_set_pos(obj, 43, 135);
-            lv_obj_set_size(obj, 86, 50);
-            lv_obj_add_event_cb(obj, action_switch_to_time_page, LV_EVENT_CLICKED, (void *)0);
-            {
-                lv_obj_t *parent_obj = obj;
-                {
-                    lv_obj_t *obj = lv_label_create(parent_obj);
-                    lv_obj_set_pos(obj, 0, 0);
-                    lv_obj_set_size(obj, LV_SIZE_CONTENT, LV_SIZE_CONTENT);
-                    lv_obj_add_event_cb(obj, action_switch_to_time_page, LV_EVENT_CLICKED, (void *)0);
-                    lv_obj_set_style_align(obj, LV_ALIGN_CENTER, LV_PART_MAIN | LV_STATE_DEFAULT);
-                    lv_label_set_text(obj, "Clock");
-                }
-            }
-        }
-    }
-    
-    tick_screen_calendar_page();
-}
-
-void tick_screen_calendar_page() {
-}
-
 void create_screen_main_page() {
     lv_obj_t *obj = lv_obj_create(0);
     objects.main_page = obj;
@@ -87,7 +53,7 @@ void create_screen_main_page() {
                     // DOW
                     lv_obj_t *obj = lv_label_create(parent_obj);
                     objects.dow = obj;
-                    lv_obj_set_pos(obj, 0, -50);
+                    lv_obj_set_pos(obj, 0, -40);
                     lv_obj_set_size(obj, LV_SIZE_CONTENT, LV_SIZE_CONTENT);
                     lv_obj_set_style_text_font(obj, &ui_font_love_days_32, LV_PART_MAIN | LV_STATE_DEFAULT);
                     lv_obj_set_style_text_color(obj, lv_color_hex(0xffd52ef6), LV_PART_MAIN | LV_STATE_DEFAULT);
@@ -126,7 +92,7 @@ void create_screen_main_page() {
                     lv_obj_set_pos(obj, 0, -50);
                     lv_obj_set_size(obj, LV_SIZE_CONTENT, LV_SIZE_CONTENT);
                     lv_obj_set_style_text_font(obj, &ui_font_love_days_32, LV_PART_MAIN | LV_STATE_DEFAULT);
-                    lv_obj_set_style_text_color(obj, lv_color_hex(0xfff6d82e), LV_PART_MAIN | LV_STATE_DEFAULT);
+                    lv_obj_set_style_text_color(obj, lv_color_hex(0xff2ef63a), LV_PART_MAIN | LV_STATE_DEFAULT);
                     lv_obj_set_style_text_opa(obj, 255, LV_PART_MAIN | LV_STATE_DEFAULT);
                     lv_obj_set_style_align(obj, LV_ALIGN_BOTTOM_MID, LV_PART_MAIN | LV_STATE_DEFAULT);
                     lv_label_set_text(obj, "");
@@ -229,12 +195,54 @@ void tick_screen_main_page() {
     }
 }
 
+void create_screen_calendar_page() {
+    lv_obj_t *obj = lv_obj_create(0);
+    objects.calendar_page = obj;
+    lv_obj_set_pos(obj, 0, 0);
+    lv_obj_set_size(obj, 172, 320);
+    {
+        lv_obj_t *parent_obj = obj;
+        {
+            // Show Clock
+            lv_obj_t *obj = lv_btn_create(parent_obj);
+            objects.show_clock = obj;
+            lv_obj_set_pos(obj, 0, 270);
+            lv_obj_set_size(obj, 172, 50);
+            lv_obj_add_event_cb(obj, action_switch_to_time_page, LV_EVENT_CLICKED, (void *)0);
+            {
+                lv_obj_t *parent_obj = obj;
+                {
+                    lv_obj_t *obj = lv_label_create(parent_obj);
+                    lv_obj_set_pos(obj, 0, 0);
+                    lv_obj_set_size(obj, LV_SIZE_CONTENT, LV_SIZE_CONTENT);
+                    lv_obj_add_event_cb(obj, action_switch_to_time_page, LV_EVENT_CLICKED, (void *)0);
+                    lv_obj_set_style_align(obj, LV_ALIGN_CENTER, LV_PART_MAIN | LV_STATE_DEFAULT);
+                    lv_label_set_text(obj, "Clock");
+                }
+            }
+        }
+        {
+            lv_obj_t *obj = lv_calendar_create(parent_obj);
+            lv_obj_set_pos(obj, 0, 0);
+            lv_obj_set_size(obj, 172, 270);
+            lv_calendar_header_arrow_create(obj);
+            lv_calendar_set_today_date(obj, 2022, 11, 1);
+            lv_calendar_set_showed_date(obj, 2022, 11);
+        }
+    }
+    
+    tick_screen_calendar_page();
+}
+
+void tick_screen_calendar_page() {
+}
+
 
 
 typedef void (*tick_screen_func_t)();
 tick_screen_func_t tick_screen_funcs[] = {
-    tick_screen_calendar_page,
     tick_screen_main_page,
+    tick_screen_calendar_page,
 };
 void tick_screen(int screen_index) {
     tick_screen_funcs[screen_index]();
@@ -248,6 +256,6 @@ void create_screens() {
     lv_theme_t *theme = lv_theme_default_init(dispp, lv_palette_main(LV_PALETTE_BLUE), lv_palette_main(LV_PALETTE_RED), false, LV_FONT_DEFAULT);
     lv_disp_set_theme(dispp, theme);
     
-    create_screen_calendar_page();
     create_screen_main_page();
+    create_screen_calendar_page();
 }
