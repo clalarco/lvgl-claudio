@@ -7,6 +7,8 @@
 extern "C" {
 #endif
 
+extern void action_switch_to_calendar_page(lv_event_t * e);
+extern void action_switch_to_time_page(lv_event_t * e);
 
 
 #ifdef __cplusplus

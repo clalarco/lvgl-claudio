@@ -13,6 +13,7 @@ extern const lv_font_t ui_font_love_days_32;
 extern const lv_font_t ui_font_love_days_48;
 extern const lv_font_t ui_font_love_days_96;
 extern const lv_font_t ui_font_love_days_24;
+extern const lv_font_t ui_font_love_days_12;
 
 
 #ifdef __cplusplus

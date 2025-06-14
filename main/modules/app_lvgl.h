@@ -2,8 +2,8 @@
 #define __APP_LVGL_H__
 
 #include "freertos/idf_additions.h"
-#define APP_LVGL_TICK_PERIOD_MS    2
-#define APP_LVGL_TASK_MAX_DELAY_MS 500
+#define APP_LVGL_TICK_PERIOD_MS    20
+#define APP_LVGL_TASK_MAX_DELAY_MS 1500
 #define APP_LVGL_TASK_MIN_DELAY_MS 1
 #define APP_LVGL_TASK_STACK_SIZE   (4 * 1024)
 #define APP_LVGL_TASK_PRIORITY     2
