@@ -203,25 +203,6 @@ void create_screen_calendar_page() {
     {
         lv_obj_t *parent_obj = obj;
         {
-            // Show Clock
-            lv_obj_t *obj = lv_btn_create(parent_obj);
-            objects.show_clock = obj;
-            lv_obj_set_pos(obj, 0, 270);
-            lv_obj_set_size(obj, 172, 50);
-            lv_obj_add_event_cb(obj, action_switch_to_time_page, LV_EVENT_CLICKED, (void *)0);
-            {
-                lv_obj_t *parent_obj = obj;
-                {
-                    lv_obj_t *obj = lv_label_create(parent_obj);
-                    lv_obj_set_pos(obj, 0, 0);
-                    lv_obj_set_size(obj, LV_SIZE_CONTENT, LV_SIZE_CONTENT);
-                    lv_obj_add_event_cb(obj, action_switch_to_time_page, LV_EVENT_CLICKED, (void *)0);
-                    lv_obj_set_style_align(obj, LV_ALIGN_CENTER, LV_PART_MAIN | LV_STATE_DEFAULT);
-                    lv_label_set_text(obj, "Clock");
-                }
-            }
-        }
-        {
             // calendar
             lv_obj_t *obj = lv_calendar_create(parent_obj);
             objects.calendar = obj;
@@ -230,6 +211,44 @@ void create_screen_calendar_page() {
             lv_calendar_header_arrow_create(obj);
             lv_calendar_set_today_date(obj, 2022, 11, 1);
             lv_calendar_set_showed_date(obj, 2022, 11);
+            add_style_dark_calendar(obj);
+        }
+        {
+            // Show Clock
+            lv_obj_t *obj = lv_btn_create(parent_obj);
+            objects.show_clock = obj;
+            lv_obj_set_pos(obj, 0, 270);
+            lv_obj_set_size(obj, 107, 50);
+            lv_obj_add_event_cb(obj, action_switch_to_time_page, LV_EVENT_CLICKED, (void *)0);
+            {
+                lv_obj_t *parent_obj = obj;
+                {
+                    lv_obj_t *obj = lv_img_create(parent_obj);
+                    objects.obj0 = obj;
+                    lv_obj_set_pos(obj, 25, 1);
+                    lv_obj_set_size(obj, LV_SIZE_CONTENT, LV_SIZE_CONTENT);
+                    lv_img_set_src(obj, &img_clock);
+                    lv_obj_set_style_bg_img_recolor(obj, lv_color_hex(0xffffffff), LV_PART_MAIN | LV_STATE_DEFAULT);
+                    lv_obj_set_style_bg_img_recolor_opa(obj, 256, LV_PART_MAIN | LV_STATE_DEFAULT);
+                }
+            }
+        }
+        {
+            // Show Settings
+            lv_obj_t *obj = lv_btn_create(parent_obj);
+            objects.show_settings = obj;
+            lv_obj_set_pos(obj, 107, 270);
+            lv_obj_set_size(obj, 65, 50);
+            lv_obj_add_event_cb(obj, action_switch_to_settings_page, LV_EVENT_CLICKED, (void *)0);
+            {
+                lv_obj_t *parent_obj = obj;
+                {
+                    lv_obj_t *obj = lv_img_create(parent_obj);
+                    lv_obj_set_pos(obj, 4, 1);
+                    lv_obj_set_size(obj, LV_SIZE_CONTENT, LV_SIZE_CONTENT);
+                    lv_img_set_src(obj, &img_img_settings);
+                }
+            }
         }
     }
     
@@ -239,12 +258,134 @@ void create_screen_calendar_page() {
 void tick_screen_calendar_page() {
 }
 
+void create_screen_settings_page() {
+    lv_obj_t *obj = lv_obj_create(0);
+    objects.settings_page = obj;
+    lv_obj_set_pos(obj, 0, 0);
+    lv_obj_set_size(obj, 172, 320);
+    {
+        lv_obj_t *parent_obj = obj;
+        {
+            lv_obj_t *obj = lv_tabview_create(parent_obj, LV_DIR_TOP, 32);
+            lv_obj_set_pos(obj, 0, 31);
+            lv_obj_set_size(obj, 176, 289);
+            add_style_dark_tabview(obj);
+            {
+                lv_obj_t *parent_obj = obj;
+                {
+                    // settings_wifi
+                    lv_obj_t *obj = lv_tabview_add_tab(parent_obj, "Wifi");
+                    objects.settings_wifi = obj;
+                    add_style_dark_tab(obj);
+                    lv_obj_set_style_bg_color(obj, lv_color_hex(0xffcccccc), LV_PART_MAIN | LV_STATE_DEFAULT);
+                    lv_obj_set_style_bg_color(obj, lv_color_hex(0xffcccccc), LV_PART_MAIN | LV_STATE_FOCUSED);
+                    {
+                        lv_obj_t *parent_obj = obj;
+                        {
+                            lv_obj_t *obj = lv_label_create(parent_obj);
+                            lv_obj_set_pos(obj, -4, 0);
+                            lv_obj_set_size(obj, LV_SIZE_CONTENT, LV_SIZE_CONTENT);
+                            lv_label_set_text(obj, "Network Name (SSID)");
+                        }
+                        {
+                            // Wifi SSID
+                            lv_obj_t *obj = lv_textarea_create(parent_obj);
+                            objects.wifi_ssid = obj;
+                            lv_obj_set_pos(obj, -4, 16);
+                            lv_obj_set_size(obj, 150, 36);
+                            lv_textarea_set_max_length(obj, 128);
+                            lv_textarea_set_placeholder_text(obj, "Network");
+                            lv_textarea_set_one_line(obj, true);
+                            lv_textarea_set_password_mode(obj, false);
+                            add_style_dark_textarea(obj);
+                        }
+                        {
+                            lv_obj_t *obj = lv_label_create(parent_obj);
+                            lv_obj_set_pos(obj, -4, 68);
+                            lv_obj_set_size(obj, LV_SIZE_CONTENT, LV_SIZE_CONTENT);
+                            lv_label_set_text(obj, "Password");
+                        }
+                        {
+                            // Wifi Password
+                            lv_obj_t *obj = lv_textarea_create(parent_obj);
+                            objects.wifi_password = obj;
+                            lv_obj_set_pos(obj, -4, 84);
+                            lv_obj_set_size(obj, 150, 36);
+                            lv_textarea_set_max_length(obj, 128);
+                            lv_textarea_set_placeholder_text(obj, "Password");
+                            lv_textarea_set_one_line(obj, true);
+                            lv_textarea_set_password_mode(obj, true);
+                        }
+                    }
+                }
+                {
+                    lv_obj_t *obj = lv_tabview_add_tab(parent_obj, "Timezone");
+                    objects.obj1 = obj;
+                    add_style_dark_tab(obj);
+                    lv_obj_set_style_bg_color(obj, lv_color_hex(0xff000000), LV_PART_MAIN | LV_STATE_CHECKED);
+                    {
+                        lv_obj_t *parent_obj = obj;
+                        {
+                            lv_obj_t *obj = lv_label_create(parent_obj);
+                            lv_obj_set_pos(obj, -4, 0);
+                            lv_obj_set_size(obj, LV_SIZE_CONTENT, LV_SIZE_CONTENT);
+                            lv_label_set_text(obj, "TimeZone Spec");
+                        }
+                        {
+                            // timezone_spec
+                            lv_obj_t *obj = lv_textarea_create(parent_obj);
+                            objects.timezone_spec = obj;
+                            lv_obj_set_pos(obj, -4, 16);
+                            lv_obj_set_size(obj, 150, 36);
+                            lv_textarea_set_max_length(obj, 128);
+                            lv_textarea_set_placeholder_text(obj, "Timezone");
+                            lv_textarea_set_one_line(obj, true);
+                            lv_textarea_set_password_mode(obj, false);
+                        }
+                    }
+                }
+            }
+        }
+        {
+            lv_obj_t *obj = lv_label_create(parent_obj);
+            lv_obj_set_pos(obj, 61, 8);
+            lv_obj_set_size(obj, 111, 16);
+            lv_obj_set_style_align(obj, LV_ALIGN_DEFAULT, LV_PART_MAIN | LV_STATE_DEFAULT);
+            lv_label_set_text(obj, "Settings");
+        }
+        {
+            // leave_settings
+            lv_obj_t *obj = lv_btn_create(parent_obj);
+            objects.leave_settings = obj;
+            lv_obj_set_pos(obj, 0, 0);
+            lv_obj_set_size(obj, 46, 31);
+            lv_obj_add_event_cb(obj, action_switch_to_time_page, LV_EVENT_PRESSED, (void *)0);
+            {
+                lv_obj_t *parent_obj = obj;
+                {
+                    lv_obj_t *obj = lv_label_create(parent_obj);
+                    lv_obj_set_pos(obj, 0, 0);
+                    lv_obj_set_size(obj, LV_SIZE_CONTENT, LV_SIZE_CONTENT);
+                    lv_obj_set_style_align(obj, LV_ALIGN_CENTER, LV_PART_MAIN | LV_STATE_DEFAULT);
+                    lv_label_set_text(obj, "<");
+                }
+            }
+        }
+    }
+    
+    tick_screen_settings_page();
+}
+
+void tick_screen_settings_page() {
+}
+
 
 
 typedef void (*tick_screen_func_t)();
 tick_screen_func_t tick_screen_funcs[] = {
     tick_screen_main_page,
     tick_screen_calendar_page,
+    tick_screen_settings_page,
 };
 void tick_screen(int screen_index) {
     tick_screen_funcs[screen_index]();
@@ -260,4 +401,5 @@ void create_screens() {
     
     create_screen_main_page();
     create_screen_calendar_page();
+    create_screen_settings_page();
 }
